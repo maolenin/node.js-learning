@@ -38,14 +38,14 @@ app.listen(3333, () => {
 
 // Define a route to fetch the month name based on a given number
 app.get("/fetchMonth/:num", (req, res) => {
-    # Parse the number from the request parameters
+    // Parse the number from the request parameters 
     let num = parseInt(req.params.num);
-    # Check if the number is a valid month number
+    // Check if the number is a valid month number
     if(num < 1 || num > 12) {
-        # Send an error message if the number is not valid
-        res.send("Not a valid month number");
+        // Send an error message if the number is not valid
+        res.send("Not a valid month number\n");
     } else {
-        # Send the corresponding month name if the number is valid
-        res.send(months[num - 1]);
+        // Send the corresponding month name if the number is valid
+        res.send(months[num - 1] + "\n");
     }
 });

@@ -9,7 +9,7 @@ app.use(function (req, res, next) {
     // Check if the password query parameter matches the expected value
     if (req.query.password !== "pwd123") {
         // Send an error response if the password does not match
-        return res.status(402).send("This user cannot login ");
+        return res.status(402).send("This user cannot login \n");
     }
     // Log the current time
     console.log('Time:', Date.now());
@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
 // Define a route for the /home path
 app.get("/home", (req, res) => {
     // Send a "Hello World!" message as a response
-    return res.send("Hello World!");
+    return res.send("Hello World!\n");
 });
 
 // Start the server and listen on port 3333

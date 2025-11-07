@@ -61,7 +61,7 @@ app.post("/login", (req, res) => {
     req.session.authorization = {
       accessToken, username
     };
-    return res.status(200).send("User successfully logged in");
+    return res.status(200).send("User successfully logged in \n");
   } else {
     return res.status(208).json({ message: "Invalid Login. Check username and password" });
   }
