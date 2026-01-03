@@ -3,53 +3,68 @@
 ## Table of Contents
 
 * [Safe clone of external repos into the learning path](#safe-clone-of-external-repos-into-the-learning-path)
-* [Module 1 - Introduction to Server-Side JavaScript](#module---introduction-to-server-side-javascript)
-* [Promises, Async/Await, and Axios Requests in Node.js and Express](#promises,-async/await,--and-axios-requests-in-node.js-and-Express) 
-* [Module 2 - Cheat Sheet: Asynchronous I/O with Callback Program](#module-2-cheat-Sheet:-asynchronous-i/o-with-callback-program)
+* [Module 1 - Introduction to Server-Side JavaScript](#module-1---introduction-to-server-side-javascript)
+* [Promises, Async/Await, and Axios Requests in Node.js and Express](#promises,-async/await,-and-axios-requests-in-node.js-and-express) 
+* [Module 2 - Cheat Sheet: Asynchronous I/O with Callback Program](#module-2---cheat-sheet:-asynchronous-i/o-with-callback-program)
 * [Authentication and Authorization in Node.js](#authentication-and-authorization-in-node.js)
 * [Module 3 Cheat Sheet: Express Web Application Framework](#module-3-cheat-sheet:-express-web-application-framework)
 
-#### 🧹 Start fresh: remove old local copy and clone your clean repo
+## Safe clone of external repos into the learning path
+
+1. Start fresh: remove old local copy and clone your clean repo
+
 ```sh
-rm -rf nodejs-learning/
+rm -rf nodejs-learning/ # Only if the repo already exist and it is wrong
 git clone git@github.com:maolenin/node.js-learning.git
 cd node.js-learning/
+git status --porcelain # must be empty
 ```
 
-#### 🔗 Add the external IBM repo as a subtree inside your project (squashed = single clean commit)
+2. Clone the external repo outside the main repo
+
 ```sh
-  git subtree add --prefix 01_lkpho-Cloud-applications-with-Node.js-and-React \
-  https://github.com/ibm-developer-skills-network/lkpho-Cloud-applications-with-Node.js-and-React.git \
-  main --squash
+  git clone https://github.com/ibm-developer-skills-network/lkpho-Cloud-applications-with-Node.js-and-React.git /tmp/lkpho
 ```
 
-#### 🧽 Remove any node_modules folders (safely cleans project)
-```sh
-git filter-repo --path-glob '*/node_modules/*' --invert-paths
-```
+3. Clean the external repo
 
-#### 🧰 Optimize repository after cleaning
 ```sh
+cd tmp/lkpho # VERY IMPORTANT 
+gti filter-repo --path-glob '*/node_modules/*' --invert-paths
+
 rm -rf .git/refs/original/
 git reflog expire --expire=now --all
 git gc --prune=now --aggressive
 ```
 
-#### 🧱 Add .gitignore to prevent node_modules from ever being committed again
+4. Import the cleaned repo as a subtree
+
+```sh
+cd ~/node.js-learning
+git subtree add \
+  --prefix 01_lkpho-Cloud-applications-with-Node.js-and-React \
+  /tmp/lkpho \
+  main \
+  --squash
+```
+
+5. Prevent future node_modules commits
+
 ```sh
 echo "node_modules/" >> .gitignore
 git add .gitignore
-git commit -m "Add .gitignore to exclude node_modules"
+git commit -m "chore: ignore node_modules"
 ```
 
-#### 🔗 (If not already set) Add your remote repository
+6. Push normally to GitHub
+
+```sh
+git push origin main
+```
+7. (If not already set) Add your remote repository
+
 ```sh
 git remote add origin git@github.com:maolenin/node.js-learning.git
-```
-
-#### 🚀 Push everything to GitHub
-```sh
-git push -u origin main --force
 ```
 
 ## Module 1 - Introduction to Server-Side JavaScript
