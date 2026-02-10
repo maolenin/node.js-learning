@@ -5,9 +5,9 @@
 * [Safe clone of external repos into the learning path](#safe-clone-of-external-repos-into-the-learning-path)
 * [Module 1 - Introduction to Server-Side JavaScript](#module-1---introduction-to-server-side-javascript)
 * [Promises, Async/Await, and Axios Requests in Node.js and Express](#promises,-async/await,-and-axios-requests-in-node.js-and-express) 
-* [Module 2 - Cheat Sheet: Asynchronous I/O with Callback Program](#module-2---cheat-sheet:-asynchronous-i/o-with-callback-program)
+* [Module 2 - Asynchronous I/O with Callback Program](#module-2---asynchronous-i/o-with-callback-program)
 * [Authentication and Authorization in Node.js](#authentication-and-authorization-in-node.js)
-* [Module 3 Cheat Sheet: Express Web Application Framework](#module-3-cheat-sheet:-express-web-application-framework)
+* [Module 3 - Express Web Application Framework](#module-3---express-web-application-framework)
 
 ## Safe clone of external repos into the learning path
 
@@ -392,7 +392,96 @@ postData();
 
 Here, await pauses the function execution until the POST request completes, and the result is handled inside the try block.
 
-## Module 2 - Cheat Sheet: Asynchronous I/O with Callback Program
+## Advanced Node.JS Modules
+
+### http Module
+Here is sample code that creates an instance of a server using the http module. This code makes use of the http.createServer() method to create the server instance.
+
+```js
+let http = require('http');
+http.createServer(function (req, res) {
+    res.write('hello from server');//write a response to the client
+    res.end();//end of response from server
+}).listen(6000);//the server instance listens for http requests on port 6000
+```
+
+### fs Module
+The fs module is used to interact with a file system. It does not need to be installed because it is part of the Node.js core and can simply be required. The following code sample reads a local file asynchronously using the fs module and prints the file contents to the console.
+
+```js
+const fs = require('fs');
+// Asynchronously read the file 'sample.txt'
+fs.readFile('sample.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    // Print the contents of 'sample.txt' to the console
+    console.log(data);
+});
+```
+
+The fs module can also be used for input and output, known as I/O. The fs module methods can be used to retrieve information from or write data to an external file.
+```js
+const fs = require('fs');
+// Read the contents of the file '/content.md' synchronously and store them in 'data'
+const data = fs.readFileSync('/content.md', 'utf8');
+// Print the contents of 'content.md' to the console
+console.log(data);
+```
+
+### os Module
+
+The OS module provides methods to retrieve information from the operating system that the application is running on and interact with it. This is sample code from the OS module that gets the computer's platform and architecture.
+
+```js
+let os = require('os');
+console.log("Computer OS Platform Info : " + os.platform());
+console.log("Computer OS Architecture Info: " + os.arch());
+```
+
+### path Module
+
+The path module allows you to retrieve and manipulate directory and file paths.
+The following code retrieves the last portion of a given file path and prints that value to the console:
+
+```js
+const path = require('path');
+let result = path.basename('/content/index/home.html');
+console.log(result); //outputs home.html to the console
+```
+
+### util Module
+
+```js
+let util = require('util');
+let str = 'The loop has executed %d time(s).';
+for (let i = 1; i <= 10; i++) {
+    console.log(util.format(str, i)); //outputs 'The loop has executed i time(s)'
+}
+```
+
+### url Module
+
+```js
+const url = require('url');
+let webAddress = 'http://localhost:2000/index.html?lastName=Kent&firstName=Clark';
+let qry = url.parse(webAddress, true);
+let qrydata = qry.query; //returns an object: {lastName: 'Kent', firstName: 'Clark'}
+console.log(qrydata.firstName); //outputs Clark
+```
+
+### querystring Module
+
+The querystring module provides methods to parse through the query string of a URL.
+
+```js
+let qry = require('querystring');
+let qryParams = qry.parse('lastName=Kent&firstName=Clark');
+console.log(qryParams.firstName); //returns Clark
+```
+
+## Module 2 - Asynchronous I/O with Callback Program
 
 ### Async-await	
 We can await promises as long as they are being called inside asynchronous functions.	
@@ -658,7 +747,7 @@ app.post('/verify-code', (req, res) => {
 app.listen(3000, () => console.log('Server running on port 3000'));
 ```
 
-## Module 3 Cheat Sheet: Express Web Application Framework
+## Module 3 - Express Web Application Framework
 
 ### Dependencies in `package.json`	
 A dependency of express version between 4.0 to 5.0 will be declared as:
