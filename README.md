@@ -4,7 +4,8 @@
 
 * [Safe clone of external repos into the learning path](#safe-clone-of-external-repos-into-the-learning-path)
 * [Module 1 - Introduction to Server-Side JavaScript](#module-1---introduction-to-server-side-javascript)
-* [Promises, Async/Await, and Axios Requests in Node.js and Express](#promises,-async/await,-and-axios-requests-in-node.js-and-express) 
+* [Promises, Async/Await, and Axios Requests in Node.js and Express](#promises,-async/await,-and-axios-requests-in-node.js-and-express)
+* [Advanced Node.JS Modules](#advanced-node.js-modules)
 * [Module 2 - Asynchronous I/O with Callback Program](#module-2---asynchronous-i/o-with-callback-program)
 * [Authentication and Authorization in Node.js](#authentication-and-authorization-in-node.js)
 * [Module 3 - Express Web Application Framework](#module-3---express-web-application-framework)
