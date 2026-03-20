@@ -12,7 +12,7 @@
 
 ## Safe clone of external repos into the learning path
 
-1. Start fresh: remove old local copy and clone your clean repo
+#### 1. Start fresh: remove old local copy and clone your clean repo
 
 ```sh
 rm -rf nodejs-learning/ # Only if the repo already exist and it is wrong
@@ -21,13 +21,13 @@ cd node.js-learning/
 git status --porcelain # must be empty
 ```
 
-2. Clone the external repo outside the main repo
+#### 2. Clone the external repo outside the main repo
 
 ```sh
   git clone https://github.com/ibm-developer-skills-network/lkpho-Cloud-applications-with-Node.js-and-React.git /tmp/lkpho
 ```
 
-3. Clean the external repo
+#### 3. Clean the external repo
 
 ```sh
 cd tmp/lkpho # VERY IMPORTANT 
@@ -38,7 +38,7 @@ git reflog expire --expire=now --all
 git gc --prune=now --aggressive
 ```
 
-4. Import the cleaned repo as a subtree
+#### 4. Import the cleaned repo as a subtree
 
 ```sh
 cd ~/node.js-learning
@@ -49,7 +49,7 @@ git subtree add \
   --squash
 ```
 
-5. Prevent future node_modules commits
+#### 5. Prevent future node_modules commits
 
 ```sh
 echo "node_modules/" >> .gitignore
@@ -57,12 +57,12 @@ git add .gitignore
 git commit -m "chore: ignore node_modules"
 ```
 
-6. Push normally to GitHub
+#### 6. Push normally to GitHub
 
 ```sh
 git push origin main
 ```
-7. (If not already set) Add your remote repository
+#### 7. (If not already set) Add your remote repository
 
 ```sh
 git remote add origin git@github.com:maolenin/node.js-learning.git
@@ -174,11 +174,11 @@ app.post('/register', (req, res) => {
 
 ## Promises, Async/Await, and Axios Requests in Node.js and Express
 
-1. Promises
+### 1. Promises
 
 A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It allows you to chain operations in a more readable and manageable way.
 
-### Creating a Promise
+#### Creating a Promise
 
 To create a Promise, you use the new Promise constructor, which takes a function with two parameters: resolve and reject. The resolve function is called when the asynchronous operation completes successfully, and the reject function is called when it fails.
 
@@ -199,7 +199,7 @@ const myPromise = new Promise((resolve, reject) => {
 });
 ```
 
-### Using Promises with .then() and .catch()
+#### Using Promises with .then() and .catch()
 
 You can handle the resolved value or the error using .then() and .catch() methods. These methods also return Promises, allowing you to chain multiple asynchronous operations in sequence.
 
@@ -220,7 +220,7 @@ myPromise
   });
 ```
 
-### Example: Reading a file
+#### Example: Reading a file
 
 Here's an example using the fs.promises module to read a file. The fs.promises module provides Promise-based methods for file system operations.
 
@@ -244,13 +244,13 @@ fs.readFile('example.txt', 'utf8')
   });
 ```
 
-2. Async/Await
+### 2. Async/Await
 
 As you might have already learnt, Java Script is a single-threaded scripting language. It means the process can happen only sequentially and no two processes can happen simultaneously. This is a big deterrent to any language and JS solved this by introducing asynchronous programming through Promises. While Promises solved the issues with synchronous programming, nested then can compilcate the structure and readability of the code.
 
 Async and Await are syntactic sugar over Promises, making asynchronous code look more like synchronous code, which is easier to read and write. An async function returns a Promise, and you can use await inside an async function to pause execution until a Promise is resolved or rejected.
 
-### Using async and await
+#### Using async and await
 
 ```js
 An async function always returns a Promise. Inside the async function, you can use the await keyword to pause execution until a Promise is resolved or rejected.
@@ -285,15 +285,15 @@ executeAsyncFunction();
 
 This example shows how async and await can simplify asynchronous programming in JavaScript. The async function myAsyncFunction simulates a conditional operation, returning a success message if the condition is met and throwing an error otherwise. The executeAsyncFunction uses await to call myAsyncFunction and handles the result or any errors using try and catch. This approach makes the code easier to read and understand compared to handling promises with .then() and .catch() chains.
 
-3. Axios Requests
+### 3. Axios Requests
 
 Axios is a promise-based HTTP client for the browser and Node.js. It makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations. Axios automatically transforms JSON data and provides a clean and simple API.
 
-### How Axios is Used
+#### How Axios is Used
 
 `npm install axios`
 
-#### Making a GET Request
+##### Making a GET Request
 
 ```js
 // Import the axios library
@@ -326,7 +326,7 @@ axios.get('https://api.example.com/data')
 
 The axios.get method returns a Promise that resolves with the response object, allowing you to access the data with response.data.
 
-#### Making a POST Request:
+##### Making a POST Request:
 
 ```js
 // Import the axios library.
@@ -362,7 +362,7 @@ axios.post('https://api.example.com/users', data)
 
 This code snippet demonstrates the basic usage of axios for making HTTP POST requests and handling responses and errors.
 
-#### Example: Using Async/Await with Axios
+##### Example: Using Async/Await with Axios
 
 Combining async/await with Axios provides a clean approach to handle HTTP requests:
 
@@ -825,8 +825,7 @@ userRouter.use(function (req, res, next){
   console.log(“User quert time:”, Date());
   next();
 })
-userRouter.get(“/:id”, function (req, res,
-  next) {
+userRouter.get(“/:id”, function (req, resxt) {
   res.send(“User ”+req.params.id+ “ last
   successful login ”+Date())
 })
