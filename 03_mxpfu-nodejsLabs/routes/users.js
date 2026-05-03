@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 let users = [
     {
         firstName: "John",
@@ -104,10 +103,14 @@ router.put("/:email", (req, res) => {
         if (lastName) {
             filtered_user.lastName = lastName;
         }
-        
+
         /*
         Include similar code here for updating other attributes as needed
         */
+        let firstName = req.query.firstName;
+        if (firstName) {
+            filtered_user.firstName = firstName;
+        }
         
         // Replace old user entry with updated user
         users = users.filter((user) => user.email != email);
