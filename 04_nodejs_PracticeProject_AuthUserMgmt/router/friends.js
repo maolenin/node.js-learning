@@ -58,13 +58,13 @@ router.put("/:email", function(req, res) {
             friend["DOB"] = DOB;
         }
         // Add similarly for firstName
-	if (firstName) {
-	    friend["firstName"] = firstName;
-	}
+	      if (firstName) {
+	          friend["firstName"] = firstName;
+	      }
         // Add similarly for lastName
-	if (lastName) {
-	    friend["lastName"] = lastName;
-	}
+        if (lastName) {
+            friend["lastName"] = lastName;
+        }
 
         friends[email] = friend;  // Update friend details in 'friends' object
         res.send(`Friend with the email ${email} updated.`);
