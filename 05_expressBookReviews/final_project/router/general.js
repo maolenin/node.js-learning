@@ -11,12 +11,12 @@ public_users.post("/register", (req,res) => {
   // Check if username and password are provided
   if (username && password) {
     //check if the user already exist
-    if (!users.some(user => user.username === username)) {
+    if(isValid(username)) {
+      return res.status(404).json({message: "User already exists!"});
+    } else {
       users.push({"username":username, "password":password});
       return res.status(200).json({message: "User succesfully registered"});
-    } else {
-      return res.status(404).json({message: "User already exists!"});
-    }
+    }    
   } else {
     return res.status(404).json({message: "Unable to register user."});
   }
@@ -30,7 +30,11 @@ public_users.get('/',function (req, res) {
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  res.send(JSON.stringify(books[isbn], null, 4));
+  const book = books[isbn];
+  if (book) {
+    return res.status(200).send(JSON.stringify(book, null, 4));
+  }
+  return res.status(404).json({message: "Book not found"});
  });
   
 // Get book details based on author
@@ -55,7 +59,10 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/review/:isbn',function (req, res) {
   const isbn = req.params.isbn;
   const book = books[isbn];
-  res.send(book.reviews);
+  if (book) {
+    return res.status(200).json(book.reviews);
+  }
+  return res.status(404).json({message: "Book not found"});
 });
 
 module.exports.general = public_users;
